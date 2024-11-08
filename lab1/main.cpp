@@ -95,17 +95,14 @@ void testSystem() {
     Student student1("Олег Едисеев");
     Student student2("Иван Кубанов");
 
-    // Записываем студентов на курсы
     student1.enroll(tkpo);
     student1.enroll(urpo);
     student2.enroll(tkpo);
 
-    // Преподаватель выставляет оценки
     Archive::getInstance().saveGrade(student1.getName(), teacher1.assignGrade(tkpo, 85));
     Archive::getInstance().saveGrade(student1.getName(), teacher2.assignGrade(urpo, 90));
     Archive::getInstance().saveGrade(student2.getName(), teacher2.assignGrade(urpo, 78));
 
-    // Выводим оценки студентов из архива
     Archive::getInstance().printGrades("Олег Едисеев");
     Archive::getInstance().printGrades("Иван Кубанов");
 }
