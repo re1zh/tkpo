@@ -159,7 +159,7 @@ void testConsoleApp() {
     }
 
     for (Student& student : students) {
-        for (auto course : student.getCourses()) {
+        for (Course *course : student.getCourses()) {
             int score;
             cout << "Введите оценку для студента " << student.getName() << " по курсу " << course->getName() << " (0 - 100): ";
             cin >> score;
