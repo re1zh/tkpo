@@ -69,19 +69,23 @@ class Grade {
         int score;
 };
 
-class ArchiveBase {
-    public:
-        virtual ~ArchiveBase() = default;
-        virtual void getArchiveInfo() const = 0;
-};
-
-class Archive : ArchiveBase {
+class RecordArchive {
     public:
         void saveRecord(const Teacher& teacher,  const Course& course, const Student& student, const int score) {
             const Grade grade(student, course, score);
             records[teacher.getName()][course.getName()].push_back(grade);
         }
-        void getArchiveInfo() const override {
+        const map<string, map<string, vector<Grade>>>& getRecords() const {
+            return records;
+        }
+    private:
+        map<string, map<string, vector<Grade>>> records;
+};
+
+class ArchivePrinter {
+    public:
+        static void printArchiveInfo(const RecordArchive& archive) {
+            const map<string, map<string, vector<Grade>>>& records = archive.getRecords();
             for (const auto& teacherRecord : records) {
                 cout << "Преподаватель: " << teacherRecord.first << endl;
                 for (const auto& courseRecord : teacherRecord.second) {
@@ -92,109 +96,127 @@ class Archive : ArchiveBase {
                 }
             }
         }
-    private:
-        map<string, map<string, vector<Grade>>> records;
 };
 
+class ConsoleApp {
+    public:
+        static void inputTeachersCourses(vector<Teacher>& teachers) {
+            int numTeachers;
+            cout << "Введите количество преподавателей: ";
+            cin >> numTeachers; cin.ignore();
+            if (numTeachers > 0) {
+                for (int i = 0; i < numTeachers; ++i) {
+                    string teacherName;
+                    cout << "Введите имя преподавателя " << i + 1 << ": ";
+                    getline(cin, teacherName);
+                    teachers.emplace_back(teacherName);
 
-void testConsole() {
-    vector<Student> students;
-    vector<Teacher> teachers;
-    vector<Course> courses;
+                    int numCourses;
+                    cout << "Введите количество курсов для преподавателя " << i + 1 << ": ";
+                    cin >> numCourses; cin.ignore();
 
-    int numTeachers, numStudents;
-
-    cout << "----------------Факультатив----------------" << endl;
-
-    Archive archive;
-
-    cout << "Введите количество преподавателей: ";
-    cin >> numTeachers; cin.ignore();
-    if (numTeachers > 0) {
-        for (int i = 0; i < numTeachers; ++i) {
-            string teacherName;
-            cout << "Введите имя преподавателя " << i + 1 << ": ";
-            getline(cin, teacherName);
-            teachers.emplace_back(teacherName);
-
-            int numCourses;
-            cout << "Введите количество курсов для преподавателя " << i + 1 << ": ";
-            cin >> numCourses; cin.ignore();
-
-            for (int j = 0; j < numCourses; ++j) {
-                string courseName;
-                cout << "Введите название курса №"<< j + 1 << ": ";
-                getline(cin, courseName);
-                teachers.back().createCourse(courseName);
-            }
-        }
-
-        cout << "Введите количество студентов: ";
-        cin >> numStudents; cin.ignore();
-        for (int i = 0; i < numStudents; ++i) {
-            string studentName;
-            cout << "Введите имя студента №"<< i + 1 << ": ";
-            getline(cin, studentName);
-            students.emplace_back(studentName);
-        }
-        cout << endl;
-
-        for (Student& student : students) {
-            cout << "Запись студента " << student.getName() << " на курсы" << endl;
-
-            for (int i = 0; i < teachers.size(); ++i) {
-                Teacher& teacher = teachers[i];
-                cout << "Преподаватель: " << teacher.getName() << endl;
-                const auto& courses = teacher.getCourses();
-
-                for (int j = 0; j < courses.size(); ++j) {
-                    cout << "  [" << j + 1 << "] " << courses[j].getName() << endl;
-                }
-                cout << "Введите номера курсов через пробел для записи студента " << student.getName() << " (0 для пропуска): ";
-                string line;
-                getline(cin, line);
-                stringstream ss(line);
-                int courseChoice;
-                while (ss >> courseChoice) {
-                    if (courseChoice > 0 && courseChoice <= courses.size()) {
-                        student.enroll(courses[courseChoice - 1]);
+                    for (int j = 0; j < numCourses; ++j) {
+                        string courseName;
+                        cout << "Введите название курса №"<< j + 1 << ": ";
+                        getline(cin, courseName);
+                        teachers.back().createCourse(courseName);
                     }
+                    cout << endl;
                 }
+            } else {
+                cout << "Кол-во преподавателей не может быть < 0!" << endl;
             }
         }
-        cout << endl;
 
-        for (const Teacher& teacher : teachers) {
-            const auto& courses = teacher.getCourses();
-            for (const Course& course : courses) {
-                cout << "Ввод оценок для курса " << course.getName() << " преподавателя " << teacher.getName() << "." << endl;
-                for (const Student& student : students) {
-                    bool enrolled = false;
-                    for (const Course& enrolledCourse : student.getCourses()) {
-                        if (enrolledCourse.getName() == course.getName()) {
-                            enrolled = true;
-                            break;
+        static void inputStudents (vector<Student>& students) {
+            int numStudents;
+            cout << "Введите количество студентов: ";
+            cin >> numStudents; cin.ignore();
+            if (numStudents > 0) {
+                for (int i = 0; i < numStudents; ++i) {
+                    string studentName;
+                    cout << "Введите имя студента №"<< i + 1 << ": ";
+                    getline(cin, studentName);
+                    students.emplace_back(studentName);
+                }
+                cout << endl;
+            } else {
+                cout << "Кол-во студентов должно быть > 0!" << endl;
+            }
+        }
+
+        static void enrollStudents(vector<Student>& students, vector<Teacher>& teachers) {
+            for (Student& student : students) {
+                cout << "Запись студента " << student.getName() << " на курсы" << endl;
+
+                for (int i = 0; i < teachers.size(); ++i) {
+                    Teacher& teacher = teachers[i];
+                    cout << "Преподаватель: " << teacher.getName() << endl;
+                    const auto& courses = teacher.getCourses();
+
+                    for (int j = 0; j < courses.size(); ++j) {
+                        cout << "  [" << j + 1 << "] " << courses[j].getName() << endl;
+                    }
+                    cout << "Введите номера курсов через пробел для записи студента " << student.getName() << " (0 для пропуска): ";
+                    string line;
+                    getline(cin, line);
+                    stringstream ss(line);
+                    int courseChoice;
+                    while (ss >> courseChoice) {
+                        if (courseChoice > 0 && courseChoice <= courses.size()) {
+                            student.enroll(courses[courseChoice - 1]);
                         }
                     }
-                    if (enrolled) {
-                        int grade;
-                        cout << "Введите оценку для студента " << student.getName() << " (0 - 100): ";
-                        cin >> grade;
-                        archive.saveRecord(teacher, course, student, grade);
+                }
+                cout << endl;
+            }
+        }
+
+        static void inputGrades(const vector<Student>& students, const vector<Teacher>& teachers, RecordArchive& archive) {
+            for (const Teacher& teacher : teachers) {
+                const auto& courses = teacher.getCourses();
+                for (const Course& course : courses) {
+                    cout << "Ввод оценок для курса " << course.getName() << " преподавателя " << teacher.getName() << "." << endl;
+                    for (const Student& student : students) {
+                        bool enrolled = false;
+                        for (const Course& enrolledCourse : student.getCourses()) {
+                            if (enrolledCourse.getName() == course.getName()) {
+                                enrolled = true;
+                                break;
+                            }
+                        }
+                        if (enrolled) {
+                            int grade;
+                            cout << "Введите оценку для студента " << student.getName() << " (0 - 100): ";
+                            cin >> grade;
+                            archive.saveRecord(teacher, course, student, grade);
+                        }
                     }
                 }
             }
+            cout << endl;
         }
-        cout << endl;
+};
 
-        cout << "----------------Оценки студентов----------------" << endl;
-        archive.getArchiveInfo();
-    } else {
-        cout << "Кол-во преподавателей не может быть < 0! Введите его заново ";
-    }
+void runConsoleApp() {
+    vector<Student> students;
+    vector<Teacher> teachers;
+
+    RecordArchive archive;
+    ArchivePrinter archivePrinter;
+    ConsoleApp consoleApp;
+
+    cout << "----------------Факультатив----------------" << endl;
+    consoleApp.inputTeachersCourses(teachers);
+    consoleApp.inputStudents(students);
+    consoleApp.enrollStudents(students, teachers);
+    consoleApp.inputGrades(students, teachers, archive);
+
+    cout << "----------------Оценки студентов----------------" << endl;
+    archivePrinter.printArchiveInfo(archive);
 }
 
 int main() {
-    testConsole();
+    runConsoleApp();
     return 0;
 }
