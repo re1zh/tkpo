@@ -84,8 +84,8 @@ public:
         builder->SetBody(text);
 
         string computed_hash = ComputeHash(text);
-        cout << "Computed hash: " << computed_hash << endl;
-        cout << "Original hash: " << hash << endl;
+        cout << "Сгенерированный HASH: " << computed_hash << endl;
+        cout << "Изначальный HASH: " << hash << endl;
         bool valid = (computed_hash == hash);
         builder->SetHash(hash, valid);
     }
@@ -96,7 +96,7 @@ public:
 bool ReadArticle(const string& filename, string& title, vector<string>& authors, string& body, string& hash) {
     ifstream file(filename);
     if (!file.is_open()) {
-        cerr << "Error: Could not open file " << filename << endl;
+        cerr << "Ошибка! Невозможно открыть файл " << filename << endl;
         return false;
     }
 
@@ -150,13 +150,13 @@ int main() {
 
     XMLDocument* xmlDoc = builder.GetResult();
     if (xmlDoc == nullptr) {
-        cerr << "Error: Failed to build XML document." << endl;
+        cerr << "Ошибка! Невозможно создать XML" << endl;
         return 1;
     }
 
     ofstream output_file(output_filename);
     if (!output_file.is_open()) {
-        cerr << "Error: Could not open file for writing: " << output_filename << endl;
+        cerr << "Ошибка! Невозможно открыть файл для записи " << output_filename << endl;
         return 1;
     }
 
@@ -164,11 +164,11 @@ int main() {
     output_file.close();
 
     if (output_file.fail()) {
-        cerr << "Error: Failed to write to file " << output_filename << endl;
+        cerr << "Ошибка! Невозможно сделать запись в файл " << output_filename << endl;
         return 1;
     }
 
-    cout << "XML document saved to " << output_filename << endl;
+    cout << "XML Document: " << output_filename << endl;
 
     delete xmlDoc;
 
