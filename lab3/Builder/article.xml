@@ -1,0 +1,12 @@
+<article>
+  <title>My Article Title</title>
+  <authors>
+    <author>Author1</author>
+    <author>Author2</author>
+    <author>Author3</author>
+  </authors>
+  <body>Body of article1.
+Body of article2.
+</body>
+  <hash valid="true">646205df0ada645ab8a005da4cd25c883abeede6644d69e172aed3a9949f04ff</hash>
+</article>
