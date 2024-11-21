@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdlib>
 #include <ctime>
 #include <unistd.h>
 
@@ -134,12 +133,15 @@ public:
 int main() {
     srand(static_cast<unsigned>(time(0)));
 
+    cout << "Введите количество фигур: ";
+    int numShapes; cin >> numShapes;
+
     ShapeFactory* factory = new RandomShapeFactory();
 
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < numShapes; ++i) {
         Shape* shape = factory->createShape();
         shape->draw();
-        sleep(2);
+        sleep(1);
         delete shape;
     }
     delete factory;
