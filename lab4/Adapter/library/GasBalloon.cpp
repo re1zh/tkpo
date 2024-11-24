@@ -1,8 +1,6 @@
 #include "GasBalloon.h"
 #include <sstream>
 
-using namespace std;
-
 GasBalloon::GasBalloon(double volume, double mass, double molar)
     : Volume(volume), Mass(mass), Molar(molar) {};
 

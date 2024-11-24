@@ -1,7 +1,5 @@
 #include "ObjectAdapter.h"
 
-using namespace std;
-
 ObjectAdapter::ObjectAdapter(GasBalloon* gasBalloon) : balloon(gasBalloon) {}
 
 double ObjectAdapter::CalculateDp(int T0, int dT) {
