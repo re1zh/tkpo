@@ -22,24 +22,24 @@ double Property::getArea() const {
 
 // Apartment
 Apartment::Apartment(double area, int residents, int yearBuilt, double wearAndTear)
-    : Property("Apartment", area, residents, yearBuilt, wearAndTear) {}
+    : Property("Аппартаменты", area, residents, yearBuilt, wearAndTear) {}
 
 double Apartment::calculateBaseRate() const {
-    return area * 5 - wearAndTear * 1.2;
+    return 5 * (1 - wearAndTear / 100);
 }
 
 // Townhouse
 Townhouse::Townhouse(double area, int residents, int yearBuilt, double wearAndTear)
-    : Property("Townhouse", area, residents, yearBuilt, wearAndTear) {}
+    : Property("Таун-хаус", area, residents, yearBuilt, wearAndTear) {}
 
 double Townhouse::calculateBaseRate() const {
-    return area * 7 - wearAndTear * 1.5;
+    return 7 * (1 - wearAndTear / 100);
 }
 
 // Cottage
 Cottage::Cottage(double area, int residents, int yearBuilt, double wearAndTear)
-    : Property("Cottage", area, residents, yearBuilt, wearAndTear) {}
+    : Property("Коттедж", area, residents, yearBuilt, wearAndTear) {}
 
 double Cottage::calculateBaseRate() const {
-    return area * 10 - wearAndTear * 2;
+    return 9 * (1 - wearAndTear / 100);
 }

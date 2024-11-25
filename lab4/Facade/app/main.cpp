@@ -12,9 +12,9 @@ int main()
     int insuranceTerm = 5;
 
     cout << "Расчёт страхового взноса: " << endl;
-    cout << apt.getType() << ": " << InsuranceFacade::calculatePremium(apt, insuranceTerm) << " рублей" << endl;
-    cout << th.getType() << ": " << InsuranceFacade::calculatePremium(th, insuranceTerm) << " рублей" << endl;
-    cout << ct.getType() << ": " << InsuranceFacade::calculatePremium(ct, insuranceTerm) << " рублей" << endl;
+    cout << apt.getType() << ": " << InsuranceFacade::calculatePremium(apt, insuranceTerm) << " руб." << endl;
+    cout << th.getType() << ": " << InsuranceFacade::calculatePremium(th, insuranceTerm) << " руб." << endl;
+    cout << ct.getType() << ": " << InsuranceFacade::calculatePremium(ct, insuranceTerm) << " руб." << endl;
     
     return 0;
 }

@@ -10,9 +10,10 @@ int main() {
     cout << "Изначальные данные: " << adapter->GetData() << endl;
 
     double dP = adapter->CalculateDp(300, 50);
-    cout << "Изменение давления (dP): " << dP << " Pa" << endl;
+    cout << "Изменение давления (dP): " << dP << " Па" << endl;
 
     adapter->ModifMass(0.5);
+    cout << "Добавление массы: 0.5 кг" << endl;
     cout << "Данные после изменения: " << adapter->GetData() << endl;
 
     delete adapter;

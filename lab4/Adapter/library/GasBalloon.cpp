@@ -9,7 +9,7 @@ double GasBalloon::GetPressure(int T) const {
     double n = Mass / Molar;
     return (n * R * T) / Volume;
 }
-double  GasBalloon::AmountOfMatter() const {
+double GasBalloon::AmountOfMatter() const {
     return Mass / Molar;
 }
 
