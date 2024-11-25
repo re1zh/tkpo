@@ -7,5 +7,5 @@ double InsuranceFacade::calculatePremium(Property& property, int insuranceTerm) 
 
     double premium = property.calculateBaseRate() * property.getArea() * termCoefficient * ageCoefficient * residentsCoefficient;
 
-    return std::max(premium, 1000.0);
+    return max(premium, 1000.0);
 }
