@@ -1,0 +1,15 @@
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/bin/Debug/net8.0/Phone
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/bin/Debug/net8.0/Phone.deps.json
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/bin/Debug/net8.0/Phone.runtimeconfig.json
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/bin/Debug/net8.0/Phone.dll
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/bin/Debug/net8.0/Phone.pdb
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/Phone.GeneratedMSBuildEditorConfig.editorconfig
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/Phone.AssemblyInfoInputs.cache
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/Phone.AssemblyInfo.cs
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/Phone.csproj.CoreCompileInputs.cache
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/Phone.sourcelink.json
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/Phone.dll
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/refint/Phone.dll
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/Phone.pdb
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/Phone.genruntimeconfig.cache
+/Users/re1zh/Desktop/mospolytech/tkpo/lab5/Phone/obj/Debug/net8.0/ref/Phone.dll
