@@ -22,7 +22,7 @@ public:
     PhoneState* GetTalkingState() const;
     PhoneState* GetBlockedState() const;
 
-    void Call(const std::string& number);
+    void Call(const string& number);
     void ReceiveCall();
     void EndCall();
     void AddBalance(double amount);
