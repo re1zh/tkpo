@@ -52,6 +52,7 @@ int main() {
             case 3: {
                 double amount;
                 cout << "Введите сумму пополнения: "; cin >> amount;
+                if
                 phone.AddBalance(amount);
                 break;
             }

@@ -24,6 +24,5 @@ void TalkingState::EndCall(Phone& phone) {
 }
 
 void TalkingState::AddBalance(Phone& phone, double amount) {
-    phone.SetBalance(phone.GetBalance() + amount);
-    cout << "Баланс пополнен на " << amount << ". Текущий баланс: " << phone.GetBalance() << endl;
+    cout << "Невозможно пополнить баланс во время звонка." << endl;
 }
